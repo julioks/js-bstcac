@@ -65,27 +65,27 @@ function GenerateSingleLine(x1,x2,y1,y2){
 }
 function drawLines(lines){ 
 
-  function animSep(){
+  function animStep(){
     for(var i=0; lines.length; i++)
     {
-      
+      console.log(lines[i])
         var x1=parseFloat( lines[i].getAttribute("x1"));
         var x2t=parseFloat( lines[i].getAttribute("x2t"));
         var x2=parseFloat( lines[i].getAttribute("x2"));
+        lines[i].setAttribute("x2" ,3000)
         //add or remove till we reach target
         //figure out which way were going 
-        console.log(x1)
-        if(x1>x2t)
+        if(x1>=x2t)
         {
           lines[i].setAttribute("x2" ,x2+Math.floor(Math.random() * 10+ 1))
-         
+         console.log("x1>x2")
         }
-        else if(x1<x2t)
+        else if(x1<=x2t)
         {
           lines[i].setAttribute("x2" ,x2-Math.floor(Math.random() * 10+ 1))
-          
+          console.log("x1<x2")
         }
-        requestAnimationFrame(animStep);
+       // requestAnimationFrame(animStep);
       
     }
   
@@ -96,5 +96,5 @@ lines.push(GenerateMainLines());
 lines.forEach((e)=>{
 body.append(e);
 })
-console.log(body.getElementsByTagName("svg")[0].getElementsByTagName("line"))
-drawLines(body.getElementsByTagName("svg")[0].getElementsByTagName("line"));
+//console.log(body.getElementsByTagName("svg")[0].getElementsByTagName("line")[0].getAttribute("x1"))
+drawLines(body.getElementsByTagNameNS("http://www.w3.org/2000/svg","svg")[0].getElementsByTagNameNS("http://www.w3.org/2000/svg","line"));
